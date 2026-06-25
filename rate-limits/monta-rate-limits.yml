@@ -1,0 +1,68 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Monta
+providerId: monta
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- EV Charging
+- Electric Vehicles
+- Charge Points
+- Energy
+- Mobility
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  The Monta Public API is secured with OAuth2 client-credentials bearer
+  tokens (access tokens valid roughly one hour, refresh tokens roughly 24
+  hours) and uses page / perPage pagination on list endpoints, with perPage
+  capped at 100 items. Monta does not publish specific request-rate limit
+  numbers (RPM/RPS) for the Public or Partner API; applications are expected
+  to behave well and rely on webhooks rather than aggressive polling. Specific
+  per-endpoint or per-application rate-limit values are not reconciled in this
+  artifact.
+notes: >-
+  Verify request-rate limits, throttling thresholds, and token lifetimes
+  directly with Monta during reconciliation; published values are not
+  available. The strongest documented constraint is pagination (perPage 1-100,
+  default 10).
+sources:
+- https://docs.public-api.monta.com/
+- https://docs.public-api.monta.com/reference/get-charge-points
+- https://monta.com/en/features/public-api/
+responseCodes:
+  throttled: 429
+limits:
+- name: Access Token Lifetime
+  scope: application
+  metric: seconds
+  limit: ~3600
+  notes: Bearer access tokens issued by POST /auth/token are short-lived (about one hour).
+- name: Refresh Token Lifetime
+  scope: application
+  metric: seconds
+  limit: ~86400
+  notes: Refresh tokens are valid for about 24 hours and are exchanged via POST /auth/refresh.
+- name: Pagination Page Size
+  scope: request
+  metric: items
+  limit: 100
+  notes: perPage query parameter accepts 1-100 items, default 10; page starts at 0.
+- name: Request Rate
+  scope: application
+  metric: requests
+  limit: see provider documentation
+  notes: No public RPM/RPS limit is published; use webhooks instead of frequent polling.
+policies:
+- name: OAuth2 Client Credentials
+  description: Exchange clientId and clientSecret for a short-lived bearer token; refresh before expiry.
+- name: Prefer Webhooks Over Polling
+  description: Subscribe to signed webhook events for real-time updates rather than polling list endpoints.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor 429 responses and any Retry-After header.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

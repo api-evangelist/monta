@@ -1,0 +1,255 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Monta Public API",
+    "version": "2023-09-14"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get an access token with client credentials.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://public-api.monta.com/api/v1/auth/token",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\"\n}"
+            }
+          },
+          "docs": "Exchange a clientId and clientSecret for a short-lived bearer access token and a refresh token."
+        },
+        {
+          "info": {
+            "name": "Get an access token with a refresh token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://public-api.monta.com/api/v1/auth/refresh",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"refreshToken\": \"<string>\"\n}"
+            }
+          },
+          "docs": "Exchange a valid refresh token for a new access token."
+        },
+        {
+          "info": {
+            "name": "Get current application details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.monta.com/api/v1/auth/information"
+          },
+          "docs": "Returns details about the currently authenticated application."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Charge Points",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List charge points.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.monta.com/api/v1/charge-points?page=0&perPage=10"
+          },
+          "docs": "Returns a paginated list of charge points. Required scope: charge-points."
+        },
+        {
+          "info": {
+            "name": "Get a single charge point.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.monta.com/api/v1/charge-points/:id"
+          },
+          "docs": "Returns a single charge point by its identifier. Required scope: charge-points."
+        },
+        {
+          "info": {
+            "name": "List AFIR-compliant roaming charge points.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.monta.com/api/v1/afir-charge-points?page=0&perPage=10"
+          },
+          "docs": "Returns a paginated list of publicly accessible, roaming-enabled charge points with AFIR Article 20-compliant data."
+        },
+        {
+          "info": {
+            "name": "Get EVSE status and ad-hoc price.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.monta.com/api/v1/evse/:id/status"
+          },
+          "docs": "Returns the current availability status and ad-hoc price for a given EVSE."
+        },
+        {
+          "info": {
+            "name": "List open-data charge point locations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.monta.com/api/v1/open-data-locations"
+          },
+          "docs": "Returns UK charge point locations in OCPI 2.2.1 format as open data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Charges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List charges.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.monta.com/api/v1/charges?page=0&perPage=10"
+          },
+          "docs": "Returns a paginated list of charges (charging sessions). Required scope: charge-transactions."
+        },
+        {
+          "info": {
+            "name": "Start a charge.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://public-api.monta.com/api/v1/charges",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"chargePointId\": 0\n}"
+            }
+          },
+          "docs": "Starts a charge on a given charge point. Required scope: control-charging."
+        },
+        {
+          "info": {
+            "name": "Get a single charge.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.monta.com/api/v1/charges/:id"
+          },
+          "docs": "Returns a single charge by its identifier. Required scope: charge-transactions."
+        },
+        {
+          "info": {
+            "name": "Stop a charge.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://public-api.monta.com/api/v1/charges/:id/stop"
+          },
+          "docs": "Stops an active charge. Required scope: control-charging."
+        },
+        {
+          "info": {
+            "name": "Get kWh consumption for a charge.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.monta.com/api/v1/charges/:id/kwh-consumption"
+          },
+          "docs": "Returns the energy consumption (kWh) data for a given charge. Required scope: charge-transactions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Wallet Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List wallet transactions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.monta.com/api/v1/wallet-transactions?page=0&perPage=10"
+          },
+          "docs": "Returns a paginated list of wallet transactions. Required scope: wallet-transactions."
+        },
+        {
+          "info": {
+            "name": "Get a single wallet transaction.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.monta.com/api/v1/wallet-transactions/:id"
+          },
+          "docs": "Returns a single wallet transaction by its identifier. Required scope: wallet-transactions."
+        },
+        {
+          "info": {
+            "name": "Get the personal wallet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.monta.com/api/v1/personal-wallet"
+          },
+          "docs": "Returns the personal wallet for the authenticated user. Required scope: wallet-transactions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Utilities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Detect location from IP.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.monta.com/api/v1/detect-location"
+          },
+          "docs": "Returns an IP-based geolocation estimate for the caller."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

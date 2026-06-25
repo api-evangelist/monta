@@ -1,0 +1,407 @@
+{
+  "item": [
+    {
+      "id": "a1f0c2d3-0001-4a10-9b00-monta00000001",
+      "name": "Authentication",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1f0c2d3-0002-4a10-9b00-monta00000002",
+          "name": "Get an access token with client credentials.",
+          "request": {
+            "name": "Get an access token with client credentials.",
+            "description": {},
+            "url": {
+              "path": ["api", "v1", "auth", "token"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "a1f0c2d3-0003-4a10-9b00-monta00000003",
+          "name": "Get an access token with a refresh token.",
+          "request": {
+            "name": "Get an access token with a refresh token.",
+            "description": {},
+            "url": {
+              "path": ["api", "v1", "auth", "refresh"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"<string>\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "a1f0c2d3-0004-4a10-9b00-monta00000004",
+          "name": "Get current application details.",
+          "request": {
+            "name": "Get current application details.",
+            "description": {},
+            "url": {
+              "path": ["api", "v1", "auth", "information"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "a1f0c2d3-0010-4a10-9b00-monta00000010",
+      "name": "Charge Points",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1f0c2d3-0011-4a10-9b00-monta00000011",
+          "name": "List charge points.",
+          "request": {
+            "name": "List charge points.",
+            "description": { "content": "Required scope: charge-points.", "type": "text/plain" },
+            "url": {
+              "path": ["api", "v1", "charge-points"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                { "key": "page", "value": "0" },
+                { "key": "perPage", "value": "10" }
+              ],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "id": "a1f0c2d3-0012-4a10-9b00-monta00000012",
+          "name": "Get a single charge point.",
+          "request": {
+            "name": "Get a single charge point.",
+            "description": { "content": "Required scope: charge-points.", "type": "text/plain" },
+            "url": {
+              "path": ["api", "v1", "charge-points", ":id"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "id", "value": "0" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "id": "a1f0c2d3-0013-4a10-9b00-monta00000013",
+          "name": "List AFIR-compliant roaming charge points.",
+          "request": {
+            "name": "List AFIR-compliant roaming charge points.",
+            "description": { "content": "Publicly accessible, roaming-enabled charge points with AFIR Article 20-compliant data.", "type": "text/plain" },
+            "url": {
+              "path": ["api", "v1", "afir-charge-points"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                { "key": "page", "value": "0" },
+                { "key": "perPage", "value": "10" }
+              ],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "id": "a1f0c2d3-0014-4a10-9b00-monta00000014",
+          "name": "Get EVSE status and ad-hoc price.",
+          "request": {
+            "name": "Get EVSE status and ad-hoc price.",
+            "description": { "content": "Current availability status and ad-hoc price for an EVSE.", "type": "text/plain" },
+            "url": {
+              "path": ["api", "v1", "evse", ":id", "status"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "id", "value": "0" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "id": "a1f0c2d3-0015-4a10-9b00-monta00000015",
+          "name": "List open-data charge point locations.",
+          "request": {
+            "name": "List open-data charge point locations.",
+            "description": { "content": "UK charge point locations in OCPI 2.2.1 format.", "type": "text/plain" },
+            "url": {
+              "path": ["api", "v1", "open-data-locations"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "a1f0c2d3-0020-4a10-9b00-monta00000020",
+      "name": "Charges",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1f0c2d3-0021-4a10-9b00-monta00000021",
+          "name": "List charges.",
+          "request": {
+            "name": "List charges.",
+            "description": { "content": "Required scope: charge-transactions.", "type": "text/plain" },
+            "url": {
+              "path": ["api", "v1", "charges"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                { "key": "page", "value": "0" },
+                { "key": "perPage", "value": "10" }
+              ],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "id": "a1f0c2d3-0022-4a10-9b00-monta00000022",
+          "name": "Start a charge.",
+          "request": {
+            "name": "Start a charge.",
+            "description": { "content": "Required scope: control-charging.", "type": "text/plain" },
+            "url": {
+              "path": ["api", "v1", "charges"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"chargePointId\": 0\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "a1f0c2d3-0023-4a10-9b00-monta00000023",
+          "name": "Get a single charge.",
+          "request": {
+            "name": "Get a single charge.",
+            "description": { "content": "Required scope: charge-transactions.", "type": "text/plain" },
+            "url": {
+              "path": ["api", "v1", "charges", ":id"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "id", "value": "0" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "id": "a1f0c2d3-0024-4a10-9b00-monta00000024",
+          "name": "Stop a charge.",
+          "request": {
+            "name": "Stop a charge.",
+            "description": { "content": "Required scope: control-charging.", "type": "text/plain" },
+            "url": {
+              "path": ["api", "v1", "charges", ":id", "stop"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "id", "value": "0" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "POST"
+          },
+          "response": []
+        },
+        {
+          "id": "a1f0c2d3-0025-4a10-9b00-monta00000025",
+          "name": "Get kWh consumption for a charge.",
+          "request": {
+            "name": "Get kWh consumption for a charge.",
+            "description": { "content": "Required scope: charge-transactions.", "type": "text/plain" },
+            "url": {
+              "path": ["api", "v1", "charges", ":id", "kwh-consumption"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "id", "value": "0" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "a1f0c2d3-0030-4a10-9b00-monta00000030",
+      "name": "Wallet Transactions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1f0c2d3-0031-4a10-9b00-monta00000031",
+          "name": "List wallet transactions.",
+          "request": {
+            "name": "List wallet transactions.",
+            "description": { "content": "Required scope: wallet-transactions.", "type": "text/plain" },
+            "url": {
+              "path": ["api", "v1", "wallet-transactions"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                { "key": "page", "value": "0" },
+                { "key": "perPage", "value": "10" }
+              ],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "id": "a1f0c2d3-0032-4a10-9b00-monta00000032",
+          "name": "Get a single wallet transaction.",
+          "request": {
+            "name": "Get a single wallet transaction.",
+            "description": { "content": "Required scope: wallet-transactions.", "type": "text/plain" },
+            "url": {
+              "path": ["api", "v1", "wallet-transactions", ":id"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "id", "value": "0" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "id": "a1f0c2d3-0033-4a10-9b00-monta00000033",
+          "name": "Get the personal wallet.",
+          "request": {
+            "name": "Get the personal wallet.",
+            "description": { "content": "Required scope: wallet-transactions.", "type": "text/plain" },
+            "url": {
+              "path": ["api", "v1", "personal-wallet"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "a1f0c2d3-0040-4a10-9b00-monta00000040",
+      "name": "Utilities",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1f0c2d3-0041-4a10-9b00-monta00000041",
+          "name": "Detect location from IP.",
+          "request": {
+            "name": "Detect location from IP.",
+            "description": { "content": "IP-based geolocation estimate for the caller.", "type": "text/plain" },
+            "url": {
+              "path": ["api", "v1", "detect-location"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://public-api.monta.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a1f0c2d3-0000-4a10-9b00-monta00000000",
+    "name": "Monta Public API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Monta Public API for EV charging - charge points, charges (sessions), EVSE status, and wallet transactions. Authentication uses OAuth2 client-credentials bearer tokens obtained from POST /api/v1/auth/token.\n\nDocumentation: https://docs.public-api.monta.com/",
+      "type": "text/plain"
+    }
+  }
+}

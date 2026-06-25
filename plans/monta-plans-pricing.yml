@@ -1,0 +1,82 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Monta
+providerId: monta
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- EV Charging
+- Electric Vehicles
+- Charge Points
+- Energy
+- Mobility
+- Plans
+description: >-
+  Monta does not publish public, self-service pricing for the Monta Public API
+  or Partner API. Access is sales-led: prospective integrators book a demo or
+  contact sales for commercial terms. The Monta Public API is positioned for
+  individual users and home/smart integrations, while the Partner API targets
+  enterprise and charge point operator use cases. Consumer charging in the
+  Monta app is billed per session (energy plus any operator/roaming fees), but
+  API access tiers and prices are not disclosed publicly.
+notes: >-
+  No public price points are available. All plan entries below are placeholders
+  pending reconciliation against a signed commercial agreement or an updated
+  public pricing page. Verify directly with Monta sales.
+sources:
+- https://monta.com/en/features/public-api/
+- https://monta.com/en/features/api/
+- https://docs.public-api.monta.com/
+plans:
+- id: monta-public-api
+  name: Public API Access
+  type: contract
+  description: >-
+    REST access to charge points, charges, EVSE status, and wallet
+    transactions for individual and smart-home use cases. Commercial terms
+    are sales-led; not publicly priced.
+  entries:
+  - label: Public API Access
+    name: public_api
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Charge Points
+  - name: Charges and Sessions
+  - name: Wallet Transactions
+  - name: EVSE Status
+- id: monta-partner-api
+  name: Partner API Access
+  type: contract
+  description: >-
+    Enterprise integration access for charge point operators and partners,
+    including charge point management, price groups and availability,
+    roaming, and webhook configuration. Sales-led commercial terms.
+  entries:
+  - label: Partner API Access
+    name: partner_api
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Charge Point Management
+  - name: Price Groups and Tariffs
+  - name: Teams
+  - name: Webhooks
+  - name: Roaming
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

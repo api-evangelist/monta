@@ -1,0 +1,89 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Monta
+providerId: monta
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- EV Charging
+- Electric Vehicles
+- Charge Points
+- Energy
+- Mobility
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Monta spend. Monta is an EV-charging software platform whose
+  commercial costs are split between platform/API access (sales-led, not
+  publicly priced) and the underlying energy and charging activity (per-kWh
+  energy cost, plus operator, roaming, and platform fees per charging
+  session). API consumers pay negotiated platform fees rather than per-call
+  metered API pricing. Specific rates are not public and are not reconciled in
+  this artifact.
+notes: >-
+  Monta does not publish API or platform pricing; reconcile against a signed
+  commercial agreement. Energy and session economics depend on charge point
+  operator tariffs, local electricity prices, and roaming agreements.
+sources:
+- https://monta.com/en/features/public-api/
+- https://monta.com/en/features/api/
+- https://docs.public-api.monta.com/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Monta
+serviceCategory: EV Charging and Energy
+billingModel:
+  pricingCategory: Contract
+  billingFrequency: Monthly
+  billingCurrency: EUR
+  chargeCategories:
+  - Usage
+  - Purchase
+meters:
+- name: charging_sessions
+  description: Charging sessions (charges) started and completed via the platform and API.
+  unit: sessions
+  aggregation: sum
+  dimensions:
+  - team
+  - charge_point
+- name: energy_kwh
+  description: Energy delivered through charge points, billed per kWh including operator and roaming fees.
+  unit: kwh
+  aggregation: sum
+  dimensions:
+  - team
+  - charge_point
+- name: wallet_transactions
+  description: Wallet transactions (top-ups, charges, payouts) recorded against accounts.
+  unit: transactions
+  aggregation: sum
+  dimensions:
+  - team
+  - wallet
+- name: platform_fee
+  description: Negotiated platform / API access fee (sales-led, not publicly priced).
+  unit: contract
+  aggregation: sum
+  dimensions:
+  - team
+principles:
+- name: Visibility
+  description: Pull wallet transactions and per-charge kWh consumption via the API to attribute energy spend.
+- name: Allocation
+  description: Tag charge points and charges by team / site to map costs to internal cost centers.
+- name: Optimization
+  description: Use price groups, availability schedules, and smart-charging (solar / off-peak energy prices) to reduce per-session energy cost.
+- name: Accountability
+  description: Assign owners per team / site; review session and energy spend against budget and operator tariffs.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

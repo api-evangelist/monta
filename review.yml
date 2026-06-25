@@ -1,0 +1,83 @@
+aid: monta
+name: Monta
+review:
+  question: Does Monta expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-21'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. The Monta Public API is a request /
+    response REST interface (HTTPS). Real-time delivery is provided by signed
+    HTTP webhook callbacks, not by a WebSocket or Server-Sent Events stream
+    that Monta operates. Webhooks are server-to-server HTTP POSTs and are not
+    a streaming transport modeled by AsyncAPI in this catalog.
+findings:
+  summary: |
+    Monta does not publish a documented public WebSocket API. The Monta Public
+    API exposes only REST (HTTPS) endpoints under
+    https://public-api.monta.com/api/v1, secured with OAuth2
+    client-credentials bearer tokens. Real-time updates are delivered through
+    signed webhook payloads (HTTP POST callbacks to a consumer-provided URL)
+    covering charge transactions, OCPP messages, sites, teams, wallet
+    transactions, and more, rather than through any ws:// or wss:// endpoint.
+    No bidirectional or streaming WebSocket surface is documented for charge
+    points, charges, wallets, or any other resource. (OCPP WebSocket sessions
+    run between the charge point hardware and Monta's back end; that is not a
+    public developer API surface.)
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://public-api.monta.com/api/v1
+      documented: true
+    - protocol: Webhook
+      scheme: https
+      note: Signed HTTP POST callbacks to a consumer-provided URL for real-time platform events. Server-to-server HTTP, not WebSocket.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No public WebSocket developer endpoint is documented for the Monta Public or Partner API as of the review date. OCPP WebSocket links between charge points and Monta's platform are infrastructure, not a public API.
+  endpointsConfirmedRest:
+    - POST   https://public-api.monta.com/api/v1/auth/token
+    - POST   https://public-api.monta.com/api/v1/auth/refresh
+    - GET    https://public-api.monta.com/api/v1/auth/information
+    - GET    https://public-api.monta.com/api/v1/charge-points
+    - GET    https://public-api.monta.com/api/v1/charge-points/{id}
+    - GET    https://public-api.monta.com/api/v1/afir-charge-points
+    - GET    https://public-api.monta.com/api/v1/evse/{id}/status
+    - GET    https://public-api.monta.com/api/v1/charges
+    - POST   https://public-api.monta.com/api/v1/charges
+    - GET    https://public-api.monta.com/api/v1/charges/{id}
+    - POST   https://public-api.monta.com/api/v1/charges/{id}/stop
+    - GET    https://public-api.monta.com/api/v1/charges/{id}/kwh-consumption
+    - GET    https://public-api.monta.com/api/v1/wallet-transactions
+    - GET    https://public-api.monta.com/api/v1/wallet-transactions/{id}
+    - GET    https://public-api.monta.com/api/v1/personal-wallet
+    - GET    https://public-api.monta.com/api/v1/open-data-locations
+    - GET    https://public-api.monta.com/api/v1/detect-location
+sources:
+  - url: https://docs.public-api.monta.com/
+    type: Documentation
+    note: Public API reference; all documented endpoints are HTTPS REST under public-api.monta.com/api/v1. No WebSocket mentioned.
+  - url: https://docs.public-api.monta.com/llms.txt
+    type: APIReference
+    note: Machine-readable index of Public API pages and endpoints; lists REST endpoints and OAuth2 token / refresh endpoints only.
+  - url: https://monta.com/en/features/public-api/
+    type: Documentation
+    note: Describes OAuth2 client-credentials auth (1-hour bearer, 24-hour refresh) and signed webhook payloads with 14 event types. No WebSocket API.
+  - url: https://docs.partner-api.monta.com/reference/ref-webhooks
+    type: APIReference
+    note: Partner API webhook reference; real-time events delivered as signed HTTP callbacks, not WebSocket streams.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists on the Monta Public or Partner API.
+    Real-time delivery is via signed HTTP webhooks, which are modeled as a
+    Webhooks API entry in apis.yml rather than as an AsyncAPI streaming
+    document. The REST surface is captured in openapi/monta-openapi.yml with
+    OAuth2 client-credentials bearer authentication documented explicitly.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

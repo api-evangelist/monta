@@ -1,0 +1,166 @@
+aid: monta
+url: https://raw.githubusercontent.com/api-evangelist/monta/refs/heads/main/apis.yml
+name: Monta
+kind: company
+description: Monta is an EV-charging software platform that operates charge points,
+  a consumer driver app, and back-office tools for installers, businesses, and
+  charge point operators. The Monta Public API exposes charge points, charges
+  (charging sessions), EVSE availability and pricing, and wallet transactions via
+  a REST interface secured with OAuth2 client-credentials bearer tokens, plus
+  signed webhooks for real-time platform events.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- EV Charging
+- Electric Vehicles
+- Charge Points
+- Energy
+- Mobility
+created: '2026-06-21'
+modified: '2026-06-21'
+specificationVersion: '0.19'
+apis:
+- aid: monta:charge-points
+  name: Monta Charge Points
+  tags:
+  - Charge Points
+  - EVSE
+  - Roaming
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.public-api.monta.com/reference/get-charge-points
+  baseURL: https://public-api.monta.com/api/v1
+  properties:
+  - url: https://docs.public-api.monta.com/
+    type: Documentation
+  - url: https://docs.public-api.monta.com/reference/get-charge-points
+    type: APIReference
+  - url: openapi/monta-openapi.yml
+    type: OpenAPI
+  - url: collections/monta.postman_collection.json
+    type: PostmanCollection
+  - url: collections/monta.opencollection.json
+    type: OpenCollection
+  description: List and read charge points (GET /charge-points, GET
+    /charge-points/{id}), read AFIR-compliant roaming charge points, and read
+    EVSE availability status and ad-hoc pricing. Requires the `charge-points`
+    scope.
+- aid: monta:charges-sessions
+  name: Monta Charges and Sessions
+  tags:
+  - Charges
+  - Sessions
+  - Control Charging
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.public-api.monta.com/reference/start-charge
+  baseURL: https://public-api.monta.com/api/v1
+  properties:
+  - url: https://docs.public-api.monta.com/
+    type: Documentation
+  - url: https://docs.public-api.monta.com/reference/start-charge
+    type: APIReference
+  - url: openapi/monta-openapi.yml
+    type: OpenAPI
+  - url: collections/monta.postman_collection.json
+    type: PostmanCollection
+  - url: collections/monta.opencollection.json
+    type: OpenCollection
+  description: List and read charges (charging sessions), start and stop charges
+    on a charge point, and read per-charge kWh consumption. Reads require the
+    `charge-transactions` scope; starting and stopping charges requires the
+    `control-charging` scope.
+- aid: monta:teams
+  name: Monta Teams
+  tags:
+  - Teams
+  - Accounts
+  - Operators
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.public-api.monta.com/
+  baseURL: https://public-api.monta.com/api/v1
+  properties:
+  - url: https://docs.public-api.monta.com/
+    type: Documentation
+  - url: openapi/monta-openapi.yml
+    type: OpenAPI
+  description: Team and operator account context for charge points, charges, and
+    wallets on the Monta platform. Team-scoped resource management is exposed
+    more fully through the Monta Partner API; the Public API surfaces team
+    context implicitly via the authenticated application's access.
+- aid: monta:wallets-transactions
+  name: Monta Wallets and Transactions
+  tags:
+  - Wallets
+  - Transactions
+  - Payments
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.public-api.monta.com/reference/get-wallet-transactions
+  baseURL: https://public-api.monta.com/api/v1
+  properties:
+  - url: https://docs.public-api.monta.com/
+    type: Documentation
+  - url: https://docs.public-api.monta.com/reference/get-wallet-transactions
+    type: APIReference
+  - url: openapi/monta-openapi.yml
+    type: OpenAPI
+  - url: collections/monta.postman_collection.json
+    type: PostmanCollection
+  - url: collections/monta.opencollection.json
+    type: OpenCollection
+  description: List and read wallet transactions and read the personal wallet
+    (GET /wallet-transactions, GET /wallet-transactions/{id}, GET
+    /personal-wallet). Requires the `wallet-transactions` scope.
+- aid: monta:tariffs-plans
+  name: Monta Tariffs and Plans
+  tags:
+  - Tariffs
+  - Pricing
+  - Price Groups
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.public-api.monta.com/
+  baseURL: https://public-api.monta.com/api/v1
+  properties:
+  - url: https://docs.public-api.monta.com/
+    type: Documentation
+  - url: https://monta.com/en/features/public-api/
+    type: Website
+  - url: openapi/monta-openapi.yml
+    type: OpenAPI
+  description: Charge point pricing and tariffs. EVSE ad-hoc pricing is readable
+    through the Public API EVSE status endpoint; full tariff and price-group
+    management (price groups, availability schedules) is exposed through the
+    Monta Partner API.
+- aid: monta:webhooks
+  name: Monta Webhooks
+  tags:
+  - Webhooks
+  - Events
+  - Real Time
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.public-api.monta.com/
+  baseURL: https://public-api.monta.com/api/v1
+  properties:
+  - url: https://docs.public-api.monta.com/
+    type: Documentation
+  - url: https://monta.com/en/features/public-api/
+    type: Website
+  description: Signed webhook payloads deliver real-time platform events without
+    polling, covering charge transactions, OCPP messages, sites, teams, wallet
+    transactions, and more. Webhook subscription configuration is managed
+    through the Monta Partner API.
+common:
+- type: GitHubOrganization
+  url: https://github.com/monta-app
+- type: LinkedIn
+  url: https://www.linkedin.com/company/montaapp
+- type: Website
+  url: https://www.monta.com
+- type: Documentation
+  url: https://docs.public-api.monta.com/
+- type: Plans
+  url: plans/monta-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/monta-rate-limits.yml
+- type: FinOps
+  url: finops/monta-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
