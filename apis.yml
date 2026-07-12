@@ -147,6 +147,10 @@ apis:
     transactions, and more. Webhook subscription configuration is managed
     through the Monta Partner API.
 common:
+- type: DomainSecurity
+  url: security/monta-domain-security.yml
+- type: Authentication
+  url: authentication/monta-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/monta-app
 - type: LinkedIn

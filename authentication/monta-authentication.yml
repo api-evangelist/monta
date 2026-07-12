@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/monta-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: OAuth2 client-credentials bearer token obtained from POST /auth/token.
+  sources:
+  - openapi/monta-openapi.yml
