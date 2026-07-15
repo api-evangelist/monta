@@ -147,6 +147,8 @@ apis:
     transactions, and more. Webhook subscription configuration is managed
     through the Monta Partner API.
 common:
+- type: AgenticAccess
+  url: agentic-access/monta-agentic-access.yml
 - type: DomainSecurity
   url: security/monta-domain-security.yml
 - type: Authentication
