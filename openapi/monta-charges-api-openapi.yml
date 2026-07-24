@@ -1,0 +1,203 @@
+openapi: 3.0.1
+info:
+  title: Monta Public Authentication Charges API
+  description: 'The Monta Public API lets developers connect to the Monta EV-charging platform to read charge points, start and stop charges (charging sessions), inspect EVSE availability and pricing, and read wallet transactions. Authentication uses OAuth2 client-credentials: exchange a clientId and clientSecret for a short-lived bearer access token (and a longer-lived refresh token) and send it as a Bearer token on each request.'
+  termsOfService: https://monta.com/en/terms-conditions/
+  contact:
+    name: Monta Support
+    url: https://docs.public-api.monta.com/
+  version: '2023-09-14'
+servers:
+- url: https://public-api.monta.com/api/v1
+  description: Monta Public API production
+security:
+- bearerAuth: []
+tags:
+- name: Charges
+paths:
+  /charges:
+    get:
+      operationId: listCharges
+      tags:
+      - Charges
+      summary: List charges.
+      description: 'Returns a paginated list of charges (charging sessions). Required scope: `charge-transactions`.'
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A paginated list of charges.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeList'
+    post:
+      operationId: startCharge
+      tags:
+      - Charges
+      summary: Start a charge.
+      description: 'Starts a charge (charging session) on a given charge point. Required scope: `control-charging`.'
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartChargeRequest'
+      responses:
+        '200':
+          description: The started charge.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Charge'
+  /charges/{id}:
+    get:
+      operationId: getCharge
+      tags:
+      - Charges
+      summary: Get a single charge.
+      description: 'Returns a single charge (charging session) by its identifier. Required scope: `charge-transactions`.'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: A charge.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Charge'
+        '404':
+          description: Charge not found.
+  /charges/{id}/stop:
+    post:
+      operationId: stopCharge
+      tags:
+      - Charges
+      summary: Stop a charge.
+      description: 'Stops an active charge (charging session). Required scope: `control-charging`.'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: The stopped charge.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Charge'
+  /charges/{id}/kwh-consumption:
+    get:
+      operationId: getChargeKwhConsumption
+      tags:
+      - Charges
+      summary: Get kWh consumption for a charge.
+      description: 'Returns the energy consumption (kWh) data for a given charge. Required scope: `charge-transactions`.'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: kWh consumption data for the charge.
+components:
+  schemas:
+    ChargeList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Charge'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    StartChargeRequest:
+      type: object
+      required:
+      - chargePointId
+      properties:
+        chargePointId:
+          type: integer
+          format: int64
+          description: Identifier of the charge point to start a charge on.
+    Charge:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        chargePointId:
+          type: integer
+          format: int64
+        state:
+          type: string
+        kwh:
+          type: number
+          format: double
+        startedAt:
+          type: string
+          format: date-time
+        stoppedAt:
+          type: string
+          format: date-time
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        perPage:
+          type: integer
+          format: int32
+        total:
+          type: integer
+          format: int64
+  parameters:
+    PerPage:
+      name: perPage
+      in: query
+      description: Number of items per page (between 1 and 100, default 10).
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 10
+        minimum: 1
+        maximum: 100
+    Page:
+      name: page
+      in: query
+      description: Page number to retrieve (starts with 0).
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 0
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth2 client-credentials bearer token obtained from POST /auth/token.

@@ -1,0 +1,107 @@
+openapi: 3.0.1
+info:
+  title: Monta Public Authentication API
+  description: 'The Monta Public API lets developers connect to the Monta EV-charging platform to read charge points, start and stop charges (charging sessions), inspect EVSE availability and pricing, and read wallet transactions. Authentication uses OAuth2 client-credentials: exchange a clientId and clientSecret for a short-lived bearer access token (and a longer-lived refresh token) and send it as a Bearer token on each request.'
+  termsOfService: https://monta.com/en/terms-conditions/
+  contact:
+    name: Monta Support
+    url: https://docs.public-api.monta.com/
+  version: '2023-09-14'
+servers:
+- url: https://public-api.monta.com/api/v1
+  description: Monta Public API production
+security:
+- bearerAuth: []
+tags:
+- name: Authentication
+paths:
+  /auth/token:
+    post:
+      operationId: createAccessTokenWithClientCredentials
+      tags:
+      - Authentication
+      summary: Get an access token with client credentials.
+      description: Exchange a clientId and clientSecret for a short-lived bearer access token and a refresh token. The access token must be supplied as a Bearer token on subsequent requests.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientCredentialsRequest'
+      responses:
+        '200':
+          description: Successfully created access token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          description: Invalid client credentials.
+  /auth/refresh:
+    post:
+      operationId: createAccessTokenWithRefreshToken
+      tags:
+      - Authentication
+      summary: Get an access token with a refresh token.
+      description: Exchange a valid refresh token for a new access token.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenRequest'
+      responses:
+        '200':
+          description: Successfully refreshed access token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          description: Invalid or expired refresh token.
+  /auth/information:
+    get:
+      operationId: getAuthInformation
+      tags:
+      - Authentication
+      summary: Get current application details.
+      description: Returns details about the currently authenticated application.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    RefreshTokenRequest:
+      type: object
+      required:
+      - refreshToken
+      properties:
+        refreshToken:
+          type: string
+    TokenResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          description: Short-lived bearer access token (valid ~1 hour).
+        refreshToken:
+          type: string
+          description: Longer-lived refresh token (valid ~24 hours).
+    ClientCredentialsRequest:
+      type: object
+      required:
+      - clientId
+      - clientSecret
+      properties:
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth2 client-credentials bearer token obtained from POST /auth/token.

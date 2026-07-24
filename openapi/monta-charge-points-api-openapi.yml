@@ -1,0 +1,182 @@
+openapi: 3.0.1
+info:
+  title: Monta Public Authentication Charge Points API
+  description: 'The Monta Public API lets developers connect to the Monta EV-charging platform to read charge points, start and stop charges (charging sessions), inspect EVSE availability and pricing, and read wallet transactions. Authentication uses OAuth2 client-credentials: exchange a clientId and clientSecret for a short-lived bearer access token (and a longer-lived refresh token) and send it as a Bearer token on each request.'
+  termsOfService: https://monta.com/en/terms-conditions/
+  contact:
+    name: Monta Support
+    url: https://docs.public-api.monta.com/
+  version: '2023-09-14'
+servers:
+- url: https://public-api.monta.com/api/v1
+  description: Monta Public API production
+security:
+- bearerAuth: []
+tags:
+- name: Charge Points
+paths:
+  /charge-points:
+    get:
+      operationId: listChargePoints
+      tags:
+      - Charge Points
+      summary: List charge points.
+      description: 'Returns a paginated list of charge points the authenticated application can access. Required scope: `charge-points`.'
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A paginated list of charge points.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargePointList'
+  /charge-points/{id}:
+    get:
+      operationId: getChargePoint
+      tags:
+      - Charge Points
+      summary: Get a single charge point.
+      description: 'Returns a single charge point by its identifier. Required scope: `charge-points`.'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: A charge point.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargePoint'
+        '404':
+          description: Charge point not found.
+  /afir-charge-points:
+    get:
+      operationId: listAfirChargePoints
+      tags:
+      - Charge Points
+      summary: List AFIR-compliant roaming charge points.
+      description: Returns a paginated list of publicly accessible, roaming-enabled charge points with AFIR Article 20-compliant data.
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A paginated list of AFIR charge points.
+  /evse/{id}/status:
+    get:
+      operationId: getEvseStatus
+      tags:
+      - Charge Points
+      summary: Get EVSE status and ad-hoc price.
+      description: Returns the current availability status and ad-hoc price for a given EVSE (Electric Vehicle Supply Equipment).
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: EVSE status and ad-hoc price.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvseStatus'
+  /open-data-locations:
+    get:
+      operationId: listOpenDataLocations
+      tags:
+      - Charge Points
+      summary: List open-data charge point locations.
+      description: Returns UK charge point locations in OCPI 2.2.1 format as open data.
+      responses:
+        '200':
+          description: Open-data charge point locations.
+components:
+  schemas:
+    ChargePoint:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        state:
+          type: string
+          description: Current operational state of the charge point.
+        visibility:
+          type: string
+    ChargePointList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargePoint'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    EvseStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        status:
+          type: string
+          description: Current availability status of the EVSE.
+        adHocPrice:
+          type: number
+          format: double
+        currency:
+          type: string
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        perPage:
+          type: integer
+          format: int32
+        total:
+          type: integer
+          format: int64
+  parameters:
+    PerPage:
+      name: perPage
+      in: query
+      description: Number of items per page (between 1 and 100, default 10).
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 10
+        minimum: 1
+        maximum: 100
+    Page:
+      name: page
+      in: query
+      description: Page number to retrieve (starts with 0).
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 0
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth2 client-credentials bearer token obtained from POST /auth/token.

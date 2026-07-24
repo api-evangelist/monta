@@ -1,0 +1,34 @@
+openapi: 3.0.1
+info:
+  title: Monta Public Authentication Utilities API
+  description: 'The Monta Public API lets developers connect to the Monta EV-charging platform to read charge points, start and stop charges (charging sessions), inspect EVSE availability and pricing, and read wallet transactions. Authentication uses OAuth2 client-credentials: exchange a clientId and clientSecret for a short-lived bearer access token (and a longer-lived refresh token) and send it as a Bearer token on each request.'
+  termsOfService: https://monta.com/en/terms-conditions/
+  contact:
+    name: Monta Support
+    url: https://docs.public-api.monta.com/
+  version: '2023-09-14'
+servers:
+- url: https://public-api.monta.com/api/v1
+  description: Monta Public API production
+security:
+- bearerAuth: []
+tags:
+- name: Utilities
+paths:
+  /detect-location:
+    get:
+      operationId: detectLocation
+      tags:
+      - Utilities
+      summary: Detect location from IP.
+      description: Returns an IP-based geolocation estimate for the caller.
+      responses:
+        '200':
+          description: Detected location.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth2 client-credentials bearer token obtained from POST /auth/token.
