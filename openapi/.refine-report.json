@@ -1,0 +1,22 @@
+{
+  "provider": "monta",
+  "sources": [
+    "monta-authentication-api-openapi.yml",
+    "monta-charge-points-api-openapi.yml",
+    "monta-charges-api-openapi.yml",
+    "monta-utilities-api-openapi.yml",
+    "monta-wallet-transactions-api-openapi.yml"
+  ],
+  "outputs": [
+    "monta-authentication-api-openapi.yml",
+    "monta-charge-points-api-openapi.yml",
+    "monta-charges-api-openapi.yml",
+    "monta-utilities-api-openapi.yml",
+    "monta-wallet-transactions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
