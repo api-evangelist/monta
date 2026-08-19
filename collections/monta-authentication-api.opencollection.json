@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Monta Public Authentication API",
+    "version": "2023-09-14"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get an access token with client credentials.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://public-api.monta.com/api/v1/auth/token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exchange a clientId and clientSecret for a short-lived bearer access token and a refresh token. The access token must be supplied as a Bearer token on subsequent requests."
+        },
+        {
+          "info": {
+            "name": "Get an access token with a refresh token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://public-api.monta.com/api/v1/auth/refresh",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exchange a valid refresh token for a new access token."
+        },
+        {
+          "info": {
+            "name": "Get current application details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.monta.com/api/v1/auth/information",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns details about the currently authenticated application."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

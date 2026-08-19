@@ -1,0 +1,129 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Monta Public Authentication Charge Points API",
+    "version": "2023-09-14"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Charge Points",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List charge points.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.monta.com/api/v1/charge-points",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number to retrieve (starts with 0)."
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page (between 1 and 100, default 10)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a paginated list of charge points the authenticated application can access. Required scope: `charge-points`."
+        },
+        {
+          "info": {
+            "name": "Get a single charge point.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.monta.com/api/v1/charge-points/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single charge point by its identifier. Required scope: `charge-points`."
+        },
+        {
+          "info": {
+            "name": "List AFIR-compliant roaming charge points.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.monta.com/api/v1/afir-charge-points",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number to retrieve (starts with 0)."
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page (between 1 and 100, default 10)."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of publicly accessible, roaming-enabled charge points with AFIR Article 20-compliant data."
+        },
+        {
+          "info": {
+            "name": "Get EVSE status and ad-hoc price.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.monta.com/api/v1/evse/:id/status",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the current availability status and ad-hoc price for a given EVSE (Electric Vehicle Supply Equipment)."
+        },
+        {
+          "info": {
+            "name": "List open-data charge point locations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.monta.com/api/v1/open-data-locations"
+          },
+          "docs": "Returns UK charge point locations in OCPI 2.2.1 format as open data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
