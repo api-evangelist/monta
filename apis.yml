@@ -35,6 +35,10 @@ apis:
 - aid: monta:webhooks
   name: Monta Webhooks
   tags:
+  - Webhook
+  - Event
+  - Real-Time
+  tags_raw:
   - Webhooks
   - Events
   - Real Time
