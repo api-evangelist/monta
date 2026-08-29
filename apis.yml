@@ -187,6 +187,9 @@ apis:
   - type: Website
     url: https://monta.com/en/features/public-api/
 common:
+- type: CapabilityMap
+  url: capabilities/monta-capability-edges.yml
+  name: Monta Business Capability Map
 - type: AgenticAccess
   url: agentic-access/monta-agentic-access.yml
 - type: DomainSecurity

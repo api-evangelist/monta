@@ -1,0 +1,36 @@
+slug: monta
+provider: Monta
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Automotive & Mobility
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Charges
+  spec_file: monta-charges-api-openapi.yml
+  capability_id: BC-3480.20
+  capability_id_l1: BC-3480
+  capability_name: Charge Point Operations
+  confidence: 0.88
+  evidence: POST /charges startCharge Start a charge.; POST /charges/{id}/stop stopCharge Stop a charge.;
+    GET /charges/{id}/kwh-consumption
+  reason: Start/stop of charging sessions and kWh consumption retrieval is precisely charge-point session
+    lifecycle operation within EV Charging Network Operations.
+- tag: Charge Points
+  spec_file: monta-charge-points-api-openapi.yml
+  capability_id: BC-3480.20
+  capability_id_l1: BC-3480
+  capability_name: Charge Point Operations
+  confidence: 0.85
+  evidence: GET /charge-points listChargePoints List charge points.; GET /evse/{id}/status getEvseStatus
+    Get EVSE status and ad-hoc price.
+  reason: Operations expose the charge-point estate and live EVSE status/availability for an EV-charging
+    platform, matching Charge Point Operations (monitoring of charge points). Some overlap with tariff/interoperability
+    sub-capabilities (ad-hoc price, AFIR roaming locations) hence not 0.95.
