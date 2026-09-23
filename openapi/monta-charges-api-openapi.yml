@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Monta Public Authentication Charges API
+  title: Monta Public Charges API
   description: 'The Monta Public API lets developers connect to the Monta EV-charging platform to read charge points, start and stop charges (charging sessions), inspect EVSE availability and pricing, and read wallet transactions. Authentication uses OAuth2 client-credentials: exchange a clientId and clientSecret for a short-lived bearer access token (and a longer-lived refresh token) and send it as a Bearer token on each request.'
   termsOfService: https://monta.com/en/terms-conditions/
   contact:
@@ -20,7 +20,7 @@ paths:
       operationId: listCharges
       tags:
       - Charges
-      summary: List charges.
+      summary: List charges
       description: 'Returns a paginated list of charges (charging sessions). Required scope: `charge-transactions`.'
       security:
       - bearerAuth: []
@@ -38,7 +38,7 @@ paths:
       operationId: startCharge
       tags:
       - Charges
-      summary: Start a charge.
+      summary: Start a charge
       description: 'Starts a charge (charging session) on a given charge point. Required scope: `control-charging`.'
       security:
       - bearerAuth: []
@@ -60,7 +60,7 @@ paths:
       operationId: getCharge
       tags:
       - Charges
-      summary: Get a single charge.
+      summary: Get a single charge
       description: 'Returns a single charge (charging session) by its identifier. Required scope: `charge-transactions`.'
       security:
       - bearerAuth: []
@@ -85,7 +85,7 @@ paths:
       operationId: stopCharge
       tags:
       - Charges
-      summary: Stop a charge.
+      summary: Stop a charge
       description: 'Stops an active charge (charging session). Required scope: `control-charging`.'
       security:
       - bearerAuth: []
@@ -108,7 +108,7 @@ paths:
       operationId: getChargeKwhConsumption
       tags:
       - Charges
-      summary: Get kWh consumption for a charge.
+      summary: Get kWh consumption for a charge
       description: 'Returns the energy consumption (kWh) data for a given charge. Required scope: `charge-transactions`.'
       security:
       - bearerAuth: []
@@ -124,15 +124,6 @@ paths:
           description: kWh consumption data for the charge.
 components:
   schemas:
-    ChargeList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Charge'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
     StartChargeRequest:
       type: object
       required:
@@ -174,7 +165,25 @@ components:
         total:
           type: integer
           format: int64
+    ChargeList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Charge'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
   parameters:
+    Page:
+      name: page
+      in: query
+      description: Page number to retrieve (starts with 0).
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 0
     PerPage:
       name: perPage
       in: query
@@ -186,15 +195,6 @@ components:
         default: 10
         minimum: 1
         maximum: 100
-    Page:
-      name: page
-      in: query
-      description: Page number to retrieve (starts with 0).
-      required: false
-      schema:
-        type: integer
-        format: int32
-        default: 0
   securitySchemes:
     bearerAuth:
       type: http

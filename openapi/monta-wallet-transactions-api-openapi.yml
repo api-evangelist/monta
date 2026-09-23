@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Monta Public Authentication Wallet Transactions API
+  title: Monta Public Wallet Transactions API
   description: 'The Monta Public API lets developers connect to the Monta EV-charging platform to read charge points, start and stop charges (charging sessions), inspect EVSE availability and pricing, and read wallet transactions. Authentication uses OAuth2 client-credentials: exchange a clientId and clientSecret for a short-lived bearer access token (and a longer-lived refresh token) and send it as a Bearer token on each request.'
   termsOfService: https://monta.com/en/terms-conditions/
   contact:
@@ -20,7 +20,7 @@ paths:
       operationId: listWalletTransactions
       tags:
       - Wallet Transactions
-      summary: List wallet transactions.
+      summary: List wallet transactions
       description: 'Returns a paginated list of wallet transactions. Required scope: `wallet-transactions`.'
       security:
       - bearerAuth: []
@@ -39,7 +39,7 @@ paths:
       operationId: getWalletTransaction
       tags:
       - Wallet Transactions
-      summary: Get a single wallet transaction.
+      summary: Get a single wallet transaction
       description: 'Returns a single wallet transaction by its identifier. Required scope: `wallet-transactions`.'
       security:
       - bearerAuth: []
@@ -64,7 +64,7 @@ paths:
       operationId: getPersonalWallet
       tags:
       - Wallet Transactions
-      summary: Get the personal wallet.
+      summary: Get the personal wallet
       description: 'Returns the personal wallet for the authenticated user. Required scope: `wallet-transactions`.'
       security:
       - bearerAuth: []
@@ -77,15 +77,6 @@ paths:
                 $ref: '#/components/schemas/Wallet'
 components:
   schemas:
-    WalletTransactionList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletTransaction'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
     Wallet:
       type: object
       properties:
@@ -125,7 +116,25 @@ components:
         total:
           type: integer
           format: int64
+    WalletTransactionList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletTransaction'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
   parameters:
+    Page:
+      name: page
+      in: query
+      description: Page number to retrieve (starts with 0).
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 0
     PerPage:
       name: perPage
       in: query
@@ -137,15 +146,6 @@ components:
         default: 10
         minimum: 1
         maximum: 100
-    Page:
-      name: page
-      in: query
-      description: Page number to retrieve (starts with 0).
-      required: false
-      schema:
-        type: integer
-        format: int32
-        default: 0
   securitySchemes:
     bearerAuth:
       type: http

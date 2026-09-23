@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Monta Public Authentication API
   description: 'The Monta Public API lets developers connect to the Monta EV-charging platform to read charge points, start and stop charges (charging sessions), inspect EVSE availability and pricing, and read wallet transactions. Authentication uses OAuth2 client-credentials: exchange a clientId and clientSecret for a short-lived bearer access token (and a longer-lived refresh token) and send it as a Bearer token on each request.'
@@ -20,7 +20,7 @@ paths:
       operationId: createAccessTokenWithClientCredentials
       tags:
       - Authentication
-      summary: Get an access token with client credentials.
+      summary: Get an access token with client credentials
       description: Exchange a clientId and clientSecret for a short-lived bearer access token and a refresh token. The access token must be supplied as a Bearer token on subsequent requests.
       requestBody:
         required: true
@@ -42,7 +42,7 @@ paths:
       operationId: createAccessTokenWithRefreshToken
       tags:
       - Authentication
-      summary: Get an access token with a refresh token.
+      summary: Get an access token with a refresh token
       description: Exchange a valid refresh token for a new access token.
       requestBody:
         required: true
@@ -64,7 +64,7 @@ paths:
       operationId: getAuthInformation
       tags:
       - Authentication
-      summary: Get current application details.
+      summary: Get current application details
       description: Returns details about the currently authenticated application.
       security:
       - bearerAuth: []
@@ -73,13 +73,6 @@ paths:
           description: OK
 components:
   schemas:
-    RefreshTokenRequest:
-      type: object
-      required:
-      - refreshToken
-      properties:
-        refreshToken:
-          type: string
     TokenResponse:
       type: object
       properties:
@@ -89,6 +82,13 @@ components:
         refreshToken:
           type: string
           description: Longer-lived refresh token (valid ~24 hours).
+    RefreshTokenRequest:
+      type: object
+      required:
+      - refreshToken
+      properties:
+        refreshToken:
+          type: string
     ClientCredentialsRequest:
       type: object
       required:
