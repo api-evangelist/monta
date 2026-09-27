@@ -105,15 +105,18 @@ paths:
           description: Open-data charge point locations.
 components:
   schemas:
-    ChargePointList:
+    Pagination:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChargePoint'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
+        page:
+          type: integer
+          format: int32
+        perPage:
+          type: integer
+          format: int32
+        total:
+          type: integer
+          format: int64
     EvseStatus:
       type: object
       properties:
@@ -128,18 +131,15 @@ components:
           format: double
         currency:
           type: string
-    Pagination:
+    ChargePointList:
       type: object
       properties:
-        page:
-          type: integer
-          format: int32
-        perPage:
-          type: integer
-          format: int32
-        total:
-          type: integer
-          format: int64
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargePoint'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
     ChargePoint:
       type: object
       properties:
@@ -154,15 +154,6 @@ components:
         visibility:
           type: string
   parameters:
-    Page:
-      name: page
-      in: query
-      description: Page number to retrieve (starts with 0).
-      required: false
-      schema:
-        type: integer
-        format: int32
-        default: 0
     PerPage:
       name: perPage
       in: query
@@ -174,6 +165,15 @@ components:
         default: 10
         minimum: 1
         maximum: 100
+    Page:
+      name: page
+      in: query
+      description: Page number to retrieve (starts with 0).
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 0
   securitySchemes:
     bearerAuth:
       type: http
