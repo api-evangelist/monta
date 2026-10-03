@@ -89,6 +89,17 @@ components:
         total:
           type: integer
           format: int64
+    Wallet:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        balance:
+          type: number
+          format: double
+        currency:
+          type: string
     WalletTransaction:
       type: object
       properties:
@@ -114,18 +125,16 @@ components:
             $ref: '#/components/schemas/WalletTransaction'
         pagination:
           $ref: '#/components/schemas/Pagination'
-    Wallet:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        balance:
-          type: number
-          format: double
-        currency:
-          type: string
   parameters:
+    Page:
+      name: page
+      in: query
+      description: Page number to retrieve (starts with 0).
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 0
     PerPage:
       name: perPage
       in: query
@@ -137,15 +146,6 @@ components:
         default: 10
         minimum: 1
         maximum: 100
-    Page:
-      name: page
-      in: query
-      description: Page number to retrieve (starts with 0).
-      required: false
-      schema:
-        type: integer
-        format: int32
-        default: 0
   securitySchemes:
     bearerAuth:
       type: http

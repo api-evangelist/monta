@@ -82,6 +82,13 @@ components:
         refreshToken:
           type: string
           description: Longer-lived refresh token (valid ~24 hours).
+    RefreshTokenRequest:
+      type: object
+      required:
+      - refreshToken
+      properties:
+        refreshToken:
+          type: string
     ClientCredentialsRequest:
       type: object
       required:
@@ -91,13 +98,6 @@ components:
         clientId:
           type: string
         clientSecret:
-          type: string
-    RefreshTokenRequest:
-      type: object
-      required:
-      - refreshToken
-      properties:
-        refreshToken:
           type: string
   securitySchemes:
     bearerAuth:
