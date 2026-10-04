@@ -77,29 +77,6 @@ paths:
                 $ref: '#/components/schemas/Wallet'
 components:
   schemas:
-    Pagination:
-      type: object
-      properties:
-        page:
-          type: integer
-          format: int32
-        perPage:
-          type: integer
-          format: int32
-        total:
-          type: integer
-          format: int64
-    Wallet:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        balance:
-          type: number
-          format: double
-        currency:
-          type: string
     WalletTransaction:
       type: object
       properties:
@@ -116,6 +93,29 @@ components:
         createdAt:
           type: string
           format: date-time
+    Wallet:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        balance:
+          type: number
+          format: double
+        currency:
+          type: string
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        perPage:
+          type: integer
+          format: int32
+        total:
+          type: integer
+          format: int64
     WalletTransactionList:
       type: object
       properties:

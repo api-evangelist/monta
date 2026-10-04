@@ -105,6 +105,29 @@ paths:
           description: Open-data charge point locations.
 components:
   schemas:
+    ChargePointList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargePoint'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    EvseStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        status:
+          type: string
+          description: Current availability status of the EVSE.
+        adHocPrice:
+          type: number
+          format: double
+        currency:
+          type: string
     ChargePoint:
       type: object
       properties:
@@ -130,29 +153,6 @@ components:
         total:
           type: integer
           format: int64
-    EvseStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        status:
-          type: string
-          description: Current availability status of the EVSE.
-        adHocPrice:
-          type: number
-          format: double
-        currency:
-          type: string
-    ChargePointList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChargePoint'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
   parameters:
     Page:
       name: page

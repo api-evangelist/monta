@@ -124,27 +124,6 @@ paths:
           description: kWh consumption data for the charge.
 components:
   schemas:
-    Pagination:
-      type: object
-      properties:
-        page:
-          type: integer
-          format: int32
-        perPage:
-          type: integer
-          format: int32
-        total:
-          type: integer
-          format: int64
-    StartChargeRequest:
-      type: object
-      required:
-      - chargePointId
-      properties:
-        chargePointId:
-          type: integer
-          format: int64
-          description: Identifier of the charge point to start a charge on.
     Charge:
       type: object
       properties:
@@ -165,6 +144,27 @@ components:
         stoppedAt:
           type: string
           format: date-time
+    StartChargeRequest:
+      type: object
+      required:
+      - chargePointId
+      properties:
+        chargePointId:
+          type: integer
+          format: int64
+          description: Identifier of the charge point to start a charge on.
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        perPage:
+          type: integer
+          format: int32
+        total:
+          type: integer
+          format: int64
     ChargeList:
       type: object
       properties:
