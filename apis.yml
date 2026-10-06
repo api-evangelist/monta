@@ -41,7 +41,7 @@ tags:
 - Energy
 - Mobility
 created: '2026-06-21'
-modified: '2026-06-21'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: monta:webhooks
@@ -187,6 +187,8 @@ apis:
   - type: Website
     url: https://monta.com/en/features/public-api/
 common:
+- url: https://monta.com/en/blog/
+  type: Blog
 - type: CapabilityMap
   url: capabilities/monta-capability-edges.yml
   name: Monta Business Capability Map
