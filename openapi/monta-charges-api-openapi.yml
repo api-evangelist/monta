@@ -123,57 +123,6 @@ paths:
         '200':
           description: kWh consumption data for the charge.
 components:
-  schemas:
-    Charge:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        chargePointId:
-          type: integer
-          format: int64
-        state:
-          type: string
-        kwh:
-          type: number
-          format: double
-        startedAt:
-          type: string
-          format: date-time
-        stoppedAt:
-          type: string
-          format: date-time
-    StartChargeRequest:
-      type: object
-      required:
-      - chargePointId
-      properties:
-        chargePointId:
-          type: integer
-          format: int64
-          description: Identifier of the charge point to start a charge on.
-    Pagination:
-      type: object
-      properties:
-        page:
-          type: integer
-          format: int32
-        perPage:
-          type: integer
-          format: int32
-        total:
-          type: integer
-          format: int64
-    ChargeList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Charge'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
   parameters:
     Page:
       name: page
@@ -195,6 +144,57 @@ components:
         default: 10
         minimum: 1
         maximum: 100
+  schemas:
+    ChargeList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Charge'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    StartChargeRequest:
+      type: object
+      required:
+      - chargePointId
+      properties:
+        chargePointId:
+          type: integer
+          format: int64
+          description: Identifier of the charge point to start a charge on.
+    Charge:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        chargePointId:
+          type: integer
+          format: int64
+        state:
+          type: string
+        kwh:
+          type: number
+          format: double
+        startedAt:
+          type: string
+          format: date-time
+        stoppedAt:
+          type: string
+          format: date-time
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        perPage:
+          type: integer
+          format: int32
+        total:
+          type: integer
+          format: int64
   securitySchemes:
     bearerAuth:
       type: http

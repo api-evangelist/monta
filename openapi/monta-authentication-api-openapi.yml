@@ -73,22 +73,6 @@ paths:
           description: OK
 components:
   schemas:
-    TokenResponse:
-      type: object
-      properties:
-        accessToken:
-          type: string
-          description: Short-lived bearer access token (valid ~1 hour).
-        refreshToken:
-          type: string
-          description: Longer-lived refresh token (valid ~24 hours).
-    RefreshTokenRequest:
-      type: object
-      required:
-      - refreshToken
-      properties:
-        refreshToken:
-          type: string
     ClientCredentialsRequest:
       type: object
       required:
@@ -99,6 +83,22 @@ components:
           type: string
         clientSecret:
           type: string
+    RefreshTokenRequest:
+      type: object
+      required:
+      - refreshToken
+      properties:
+        refreshToken:
+          type: string
+    TokenResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          description: Short-lived bearer access token (valid ~1 hour).
+        refreshToken:
+          type: string
+          description: Longer-lived refresh token (valid ~24 hours).
   securitySchemes:
     bearerAuth:
       type: http
