@@ -37,6 +37,11 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/monta.png
 tags:
 - EV Charging
 - Electric Vehicles
+- Energy
+- Mobility
+tags_raw:
+- EV Charging
+- Electric Vehicles
 - Charge Points
 - Energy
 - Mobility
@@ -96,6 +101,8 @@ apis:
   humanURL: https://docs.public-api.monta.com/reference/get-charge-points
   baseURL: https://public-api.monta.com/api/v1
   tags:
+  - EV Charging
+  tags_raw:
   - Charge Points
   properties:
   - type: OpenAPI
