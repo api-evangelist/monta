@@ -1,4 +1,4 @@
-# Monta (monta)
+# Monta
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,152 +66,125 @@
 
 Monta is an EV-charging software platform that operates charge points, a consumer driver app, and back-office tools for installers, businesses, and charge point operators. The Monta Public API exposes charge points, charges (charging sessions), EVSE availability and pricing, and wallet transactions via a REST interface secured with OAuth2 client-credentials bearer tokens, plus signed webhooks for real-time platform events.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/monta/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/monta/refs/heads/main/apis.yml)
+**Areas:** EV Charging · Electric Vehicles · Charge Points · Energy · Mobility
 
-## Tags
+## Monta on APIs.io
 
-- EV Charging
-- Electric Vehicles
-- Charge Points
-- Energy
-- Mobility
+Everything profiled for Monta is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/monta/](https://apis.io/providers/monta/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (6)
 
-- **Created:** 2026-06-21
-- **Modified:** 2026-06-21
+- [Monta Webhooks](https://apis.io/apis/monta/webhooks/) — Signed webhook payloads deliver real-time platform events without polling, covering charge transactions, OCPP messages, sites, teams, wallet transactions,…
+- [Monta Authentication API](https://apis.io/apis/monta/monta-authentication-api/) — The Authentication API from Monta — 3 operation(s) for authentication.
+- [Monta Charge Points API](https://apis.io/apis/monta/monta-charge-points-api/) — The Charge Points API from Monta — 5 operation(s) for charge points.
+- [Monta Charges API](https://apis.io/apis/monta/monta-charges-api/) — The Charges API from Monta — 4 operation(s) for charges.
+- [Monta Utilities API](https://apis.io/apis/monta/monta-utilities-api/) — The Utilities API from Monta — 1 operation(s) for utilities.
+- [Monta Wallet Transactions API](https://apis.io/apis/monta/monta-wallet-transactions-api/) — The Wallet Transactions API from Monta — 3 operation(s) for wallet transactions.
 
-## APIs
+### Published properties
 
-### Monta Charge Points
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-List and read charge points (GET /charge-points, GET /charge-points/{id}), read AFIR-compliant roaming charge points, and read EVSE availability status and ad-hoc pricing. Requires the `charge-points` scope.
+#### Agentic access (1)
 
-- **Human URL:** [https://docs.public-api.monta.com/reference/get-charge-points](https://docs.public-api.monta.com/reference/get-charge-points)
-- **Base URL:** `https://public-api.monta.com/api/v1`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Monta Agentic Access](https://apis.io/agentic-access/monta/monta-agentic-access/)
 
-- Charge Points
-- EVSE
-- Roaming
+#### Collections (6)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://docs.public-api.monta.com/)
-- [API Reference](https://docs.public-api.monta.com/reference/get-charge-points)
-- [OpenAPI](openapi/monta-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/monta.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monta.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Monta Public API](https://apis.io/collections/monta/open-monta/)
+- [Monta Public Authentication API](https://apis.io/collections/monta/open-monta-authentication-api/)
+- [Monta Public Authentication Charge Points API](https://apis.io/collections/monta/open-monta-charge-points-api/)
+- [Monta Public Authentication Charges API](https://apis.io/collections/monta/open-monta-charges-api/)
+- [Monta Public Authentication Utilities API](https://apis.io/collections/monta/open-monta-utilities-api/)
+- [Monta Public Authentication Wallet Transactions API](https://apis.io/collections/monta/open-monta-wallet-transactions-api/)
 
-### Monta Charges and Sessions
+#### Security (2)
 
-List and read charges (charging sessions), start and stop charges on a charge point, and read per-charge kWh consumption. Reads require the `charge-transactions` scope; starting and stopping charges requires the `control-charging` scope.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://docs.public-api.monta.com/reference/start-charge](https://docs.public-api.monta.com/reference/start-charge)
-- **Base URL:** `https://public-api.monta.com/api/v1`
+- [Monta Authentication](https://apis.io/security/monta/monta-authentication/)
+- [Monta Domain Security](https://apis.io/security/monta/monta-domain-security/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Charges
-- Sessions
-- Control Charging
+Published plans, tiers and prices.
 
-#### Properties
+- [Monta Plans Pricing](https://apis.io/plans/monta/monta-plans-pricing/)
 
-- [Documentation](https://docs.public-api.monta.com/)
-- [API Reference](https://docs.public-api.monta.com/reference/start-charge)
-- [OpenAPI](openapi/monta-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/monta.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monta.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### Monta Teams
+Published request limits.
 
-Team and operator account context for charge points, charges, and wallets on the Monta platform. Team-scoped resource management is exposed more fully through the Monta Partner API; the Public API surfaces team context implicitly via the authenticated application's access.
+- [Monta Rate Limits](https://apis.io/rate-limits/monta/monta-rate-limits/)
 
-- **Human URL:** [https://docs.public-api.monta.com/](https://docs.public-api.monta.com/)
-- **Base URL:** `https://public-api.monta.com/api/v1`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Teams
-- Accounts
-- Operators
+- [Monta Finops](https://apis.io/finops/monta/monta-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://docs.public-api.monta.com/)
-- [OpenAPI](openapi/monta-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Monta Wallets and Transactions
-
-List and read wallet transactions and read the personal wallet (GET /wallet-transactions, GET /wallet-transactions/{id}, GET /personal-wallet). Requires the `wallet-transactions` scope.
-
-- **Human URL:** [https://docs.public-api.monta.com/reference/get-wallet-transactions](https://docs.public-api.monta.com/reference/get-wallet-transactions)
-- **Base URL:** `https://public-api.monta.com/api/v1`
-
-#### Tags
-
-- Wallets
-- Transactions
-- Payments
-
-#### Properties
-
-- [Documentation](https://docs.public-api.monta.com/)
-- [API Reference](https://docs.public-api.monta.com/reference/get-wallet-transactions)
-- [OpenAPI](openapi/monta-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/monta.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monta.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Monta Tariffs and Plans
-
-Charge point pricing and tariffs. EVSE ad-hoc pricing is readable through the Public API EVSE status endpoint; full tariff and price-group management (price groups, availability schedules) is exposed through the Monta Partner API.
-
-- **Human URL:** [https://docs.public-api.monta.com/](https://docs.public-api.monta.com/)
-- **Base URL:** `https://public-api.monta.com/api/v1`
-
-#### Tags
-
-- Tariffs
-- Pricing
-- Price Groups
-
-#### Properties
-
-- [Documentation](https://docs.public-api.monta.com/)
-- [Website](https://monta.com/en/features/public-api/)
-- [OpenAPI](openapi/monta-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-
-### Monta Webhooks
-
-Signed webhook payloads deliver real-time platform events without polling, covering charge transactions, OCPP messages, sites, teams, wallet transactions, and more. Webhook subscription configuration is managed through the Monta Partner API.
-
-- **Human URL:** [https://docs.public-api.monta.com/](https://docs.public-api.monta.com/)
-- **Base URL:** `https://public-api.monta.com/api/v1`
-
-#### Tags
-
-- Webhooks
-- Events
-- Real Time
-
-#### Properties
-
-- [Documentation](https://docs.public-api.monta.com/)
-- [Website](https://monta.com/en/features/public-api/)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/monta-app)
-- [LinkedIn](https://www.linkedin.com/company/montaapp)
 - [Website](https://www.monta.com)
 - [Documentation](https://docs.public-api.monta.com/)
-- [Plans](plans/monta-plans-pricing.yml)
-- [Rate Limits](rate-limits/monta-rate-limits.yml)
-- [Fin Ops](finops/monta-finops.yml)
+- [Blog](https://monta.com/en/blog/)
+- [GitHub](https://github.com/monta-app)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 24.6** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 48.2 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 5.3 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 9.8** — Energy & Utilities
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/monta/](https://apis.io/providers/monta/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Monta: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/monta/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
